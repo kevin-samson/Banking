@@ -23,7 +23,8 @@ public class UserMenu {
                     System.out.println();
                     System.out.println("1. Deposit");
                     System.out.println("2. Withdraw");
-                    System.out.println("3. Go back");
+                    System.out.println("3. View transaction history");
+                    System.out.println("4. Go back");
                     int ch = scn.nextInt();
                     if (ch == 1) {
                         System.out.print("Enter the amount ");
@@ -35,7 +36,10 @@ public class UserMenu {
                         double amount = scn.nextDouble();
                         ba.withdraw(amount);
 
+                    } else if (ch == 3) {
+                        ba.showHistory();
                     }
+
                 }
                 break;
             case 2:
