@@ -25,6 +25,7 @@ public class UserMenu {
                     System.out.println("2. Withdraw");
                     System.out.println("3. View transaction history");
                     System.out.println("4. Go back");
+                    System.out.print("Enter your choice ");
                     int ch = scn.nextInt();
                     if (ch == 1) {
                         System.out.print("Enter the amount ");
