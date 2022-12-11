@@ -11,6 +11,7 @@ public class BankManager extends Bank {
             FileInputStream fileIn = new FileInputStream("bank.ser");
             ObjectInputStream in = new ObjectInputStream(fileIn);
             b = (Bank) in.readObject();
+            System.out.println("Data loaded");
             in.close();
             fileIn.close();
         } catch (Exception e) {
