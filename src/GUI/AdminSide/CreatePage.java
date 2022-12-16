@@ -115,7 +115,7 @@ public class CreatePage implements ActionListener {
                     new AdminPage(u, b, bm);
                 }
             } catch (Exception ex) {
-                JOptionPane.showMessageDialog(null, "Please enter valid details!");
+                JOptionPane.showMessageDialog(null, "Please fill all the fields with vaild details!");
             }
         }
         if (e.getSource() == cancelbutton) {
