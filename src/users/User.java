@@ -53,7 +53,7 @@ public class User extends Person {
         return firstName + " " + lastName;
     }
 
-    public String getFirstNamw() {
+    public String getFirstName() {
         return firstName;
     }
 
