@@ -53,4 +53,24 @@ public class User extends Person {
         return firstName + " " + lastName;
     }
 
+    public String getFirstNamw() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public int getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public int getAccountNumber() {
+        return accountNumber;
+    }
+
 }
