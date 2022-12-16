@@ -13,6 +13,10 @@ public class User extends Person {
         this.accountNumber = accountNumber;
     }
 
+    public User(String firstName, String lastName, String email, int phoneNumber) {
+        super(firstName, lastName, email, phoneNumber);
+    }
+
     public void addBankAccount(BackAccount b) {
         bAccounts.add(b);
     }
@@ -43,6 +47,10 @@ public class User extends Person {
 
     public int getPin() {
         return pinNumber;
+    }
+
+    public String getName() {
+        return firstName + " " + lastName;
     }
 
 }

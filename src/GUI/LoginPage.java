@@ -90,7 +90,7 @@ public class LoginPage implements ActionListener {
                         new AdminPage(u, b, bm);
                         frame.dispose();
                     } else {
-                        new UserPage(u);
+                        new UserPage(u, bm, b);
                         frame.dispose();
                     }
                 } else {

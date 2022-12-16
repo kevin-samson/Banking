@@ -5,6 +5,7 @@ import java.awt.*;
 import src.users.User;
 import src.bank.BankManager;
 import src.GUI.AdminSide.CreatePage;
+import src.GUI.AdminSide.ViewUsers;
 import src.bank.Bank;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -20,15 +21,13 @@ public class AdminPage implements ActionListener {
     BankManager bm;
     Bank b;
 
-    AdminPage(User u, Bank b, BankManager bm) {
-        this.u = u;
-        this.b = b;
-        this.bm = bm;
+    public AdminPage() {
         welcome.setBounds(100, -75, 250, 250);
         welcome.setFont(new Font("Roboto", Font.PLAIN, 25));
 
         view.setBounds(100, 100, 200, 25);
         view.setFocusable(false);
+        view.addActionListener(this::actionPerformed);
 
         delete.setBounds(100, 150, 200, 25);
         delete.setFocusable(false);
@@ -52,6 +51,13 @@ public class AdminPage implements ActionListener {
         frame.setVisible(true);
     }
 
+    public AdminPage(User u, Bank b, BankManager bm) {
+        this();
+        this.u = u;
+        this.b = b;
+        this.bm = bm;
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == logout) {
@@ -66,5 +72,10 @@ public class AdminPage implements ActionListener {
             new CreatePage(u, b, bm);
         }
 
+        if (e.getSource() == view) {
+            System.out.println("View");
+            frame.dispose();
+            new ViewUsers(u, b, bm);
+        }
     }
 }

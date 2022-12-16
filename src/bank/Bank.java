@@ -12,10 +12,22 @@ public class Bank implements Serializable {
         people.add(u);
     }
 
-    public void getAllUsers() {
-        for (User u : people) {
-            System.out.println(u.accountNumber + " " + u.firstName + " " + u.lastName);
+    // public void getAllUsers() {
+    // for (User u : people) {
+    // System.out.println(u.accountNumber + " " + u.firstName + " " + u.lastName);
+    // }
+    // }
+
+    public String[][] getAllUsers() {
+        String[][] data = new String[people.size()][5];
+        for (int i = 0; i < people.size(); i++) {
+            data[i][0] = Integer.toString(people.get(i).accountNumber);
+            data[i][1] = people.get(i).firstName;
+            data[i][2] = people.get(i).lastName;
+            data[i][3] = people.get(i).email;
+            data[i][4] = Integer.toString(people.get(i).phoneNumber);
         }
+        return data;
     }
 
     public void deleteUser(int accountNumber) {

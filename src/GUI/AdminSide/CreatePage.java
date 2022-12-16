@@ -2,11 +2,12 @@ package src.GUI.AdminSide;
 
 import src.users.User;
 import src.bank.BankManager;
-import src.GUI.LoginPage;
+import src.GUI.AdminPage;
 import src.bank.Bank;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.regex.Pattern;
 
 public class CreatePage implements ActionListener {
     User u;
@@ -18,7 +19,7 @@ public class CreatePage implements ActionListener {
     JLabel phno = new JLabel("Phone No : ");
     JLabel eid = new JLabel("Accound ID : ");
     JTextField firstname = new JTextField();
-    JTextField lastname = new JPasswordField();
+    JTextField lastname = new JTextField();
     JTextField email = new JTextField();
     JTextField phoneno = new JTextField();
     JTextField emiratesidno = new JTextField();
@@ -26,6 +27,18 @@ public class CreatePage implements ActionListener {
     JButton cancelbutton = new JButton("Cancel");
     BankManager bm;
     Bank b;
+
+    public static boolean isValid(String email) {
+        String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\." +
+                "[a-zA-Z0-9_+&*-]+)*@" +
+                "(?:[a-zA-Z0-9-]+\\.)+[a-z" +
+                "A-Z]{2,7}$";
+
+        Pattern pat = Pattern.compile(emailRegex);
+        if (email == null)
+            return false;
+        return pat.matcher(email).matches();
+    }
 
     public CreatePage(User u, Bank b, BankManager bm) {
         this.u = u;
@@ -73,25 +86,41 @@ public class CreatePage implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == createbutton) {
-            String first = firstname.getText();
-            String last = lastname.getText();
-            String email = this.email.getText();
-            String phone = phoneno.getText();
-            String AccountNumber = emiratesidno.getText();
-
-            if (b.getUserByAccountId(Integer.parseInt(AccountNumber)) == null) {
-                b.addUser(new User(first, last, email, Integer.parseInt(phone), Integer.parseInt(AccountNumber)));
-                bm.save(b);
-            } else {
-                createuser.setText("User already exists!");
-                emiratesidno.setText("");
+            try {
+                String first = firstname.getText();
+                String last = lastname.getText();
+                String email = this.email.getText();
+                String phone = phoneno.getText();
+                String AccountNumber = emiratesidno.getText();
+                if (first.equals("") || last.equals("") || email.equals("") || phone.equals("")
+                        || AccountNumber.equals("")) {
+                    JOptionPane.showMessageDialog(null, "Please enter all details!");
+                } else if (b.getUserByAccountId(Integer.parseInt(AccountNumber)) != null) {
+                    JOptionPane.showMessageDialog(null, "User ID alredy exists!");
+                    emiratesidno.setText("");
+                } else if (!isValid(email)) {
+                    JOptionPane.showMessageDialog(null, "Please enter valid email!");
+                    this.email.setText("");
+                } else if (phone.length() > 10) {
+                    JOptionPane.showMessageDialog(null, "Please enter valid phone number!");
+                    phoneno.setText("");
+                } else if (AccountNumber.length() > 10) {
+                    JOptionPane.showMessageDialog(null, "Please enter valid account number!");
+                    emiratesidno.setText("");
+                } else {
+                    b.addUser(new User(first, last, email, Integer.parseInt(phone), Integer.parseInt(AccountNumber)));
+                    bm.save(b);
+                    JOptionPane.showMessageDialog(null, "User Created!");
+                    frame.dispose();
+                    new AdminPage(u, b, bm);
+                }
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(null, "Please enter valid details!");
             }
-            frame.dispose();
-            new LoginPage();
         }
         if (e.getSource() == cancelbutton) {
             frame.dispose();
-            new LoginPage();
+            new AdminPage(u, b, bm);
         }
     }
 
