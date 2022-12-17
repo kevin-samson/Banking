@@ -62,7 +62,7 @@ public class UserPage implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == view) {
-            new ViewBankAccounts(u, bm, b);
+            new BankAccounts(u, bm, b);
             frame.dispose();
         }
         if (e.getSource() == delete) {
