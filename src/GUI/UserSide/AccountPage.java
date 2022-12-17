@@ -78,5 +78,10 @@ public class AccountPage implements ActionListener {
             frame.dispose();
             new UserPage(u, bm, b);
         }
+
+        if (e.getSource() == deposit) {
+            frame.dispose();
+            new Deposit(u, bm, b, ba);
+        }
     }
 }
