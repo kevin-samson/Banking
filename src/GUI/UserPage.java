@@ -69,10 +69,23 @@ public class UserPage implements ActionListener {
             new ModifyDetails(u, b, bm);
             frame.dispose();
         }
-        // if (e.getSource() == create) {
-        // new AddAccount(u);
-        // frame.dispose();
-        // }
+
+        if (e.getSource() == create) {
+            String accType = JOptionPane.showInputDialog("Enter the account name: ");
+            try {
+                double balance = Double.parseDouble(JOptionPane.showInputDialog("Enter the initial balance: "));
+                if (accType != null && balance != 0) {
+                    u.addBankAccount(accType, balance);
+                    bm.save(b);
+                    JOptionPane.showMessageDialog(null, "Account created successfully!");
+                } else {
+                    JOptionPane.showMessageDialog(null, "Account creation failed!");
+                }
+            } catch (NumberFormatException nfe) {
+                JOptionPane.showMessageDialog(null, "Invalid input!");
+            }
+        }
+
         if (e.getSource() == logout) {
             new LoginPage();
             frame.dispose();
