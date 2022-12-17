@@ -103,39 +103,29 @@ public class ModifyDetails extends JFrame implements ActionListener {
             String last = lastname.getText();
             String email = this.email.getText();
             String phone = phoneno.getText();
-            // if (first.equals("") || last.equals("") || email.equals("") ||
-            // phone.equals("")) {
-            // JOptionPane.showMessageDialog(null, "Please fill all the fields");
-            // } else {
-            // int oldAccno = u.accountNumber;
-            // int oldPin = u.getPin();
-            // b.deleteUser(oldAccno);
-            // b.addUser(new User(first, last, email, Integer.parseInt(phone), oldAccno));
-            // b.getUserByAccountId(oldPin).setPin(oldPin);
-            // bm.save(b);
-            // JOptionPane.showMessageDialog(null, "Account Modified Successfully");
-            // new UserPage(b.getUserByAccountId(oldPin), bm, b);
-            // frame.dispose();
-            // }
 
             if (first.equals("") || last.equals("") || email.equals("") || phone.equals("")) {
                 JOptionPane.showMessageDialog(null, "Please fill all the fields");
             } else if (!isValid(email)) {
                 JOptionPane.showMessageDialog(null, "Please enter a valid email");
-                emailid.setText("");
+                this.email.setText("");
+            } else if (phone.length() != 10) {
+                JOptionPane.showMessageDialog(null, "Please enter a valid phone number");
+                phoneno.setText("");
             } else {
                 try {
                     int oldAccno = u.accountNumber;
                     int oldPin = u.getPin();
                     b.deleteUser(oldAccno);
                     b.addUser(new User(first, last, email, Integer.parseInt(phone), oldAccno));
-                    b.getUserByAccountId(oldPin).setPin(oldPin);
+                    b.getUserByAccountId(oldAccno).setPin(oldPin);
                     bm.save(b);
                     JOptionPane.showMessageDialog(null, "Account Modified Successfully");
                     new UserPage(b.getUserByAccountId(oldAccno), bm, b);
                     frame.dispose();
                 } catch (Exception ex) {
                     JOptionPane.showMessageDialog(null, "Please enter valid details");
+                    System.out.println(ex);
                 }
             }
         }
