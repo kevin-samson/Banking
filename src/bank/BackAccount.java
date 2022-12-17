@@ -36,6 +36,17 @@ public class BackAccount implements Serializable {
         }
     }
 
+    // Get all transactions in a 2D array
+    public String[][] getAllTransactions() {
+        String[][] data = new String[history.size()][3];
+        for (int i = 0; i < history.size(); i++) {
+            data[i][0] = history.get(i).type;
+            data[i][1] = Double.toString(history.get(i).amount);
+            data[i][2] = history.get(i).t.toString();
+        }
+        return data;
+    }
+
     public void withdraw(double amount) {
         if (balance - amount >= 0) {
             balance -= amount;
