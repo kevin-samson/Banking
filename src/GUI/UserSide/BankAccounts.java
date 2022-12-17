@@ -26,26 +26,28 @@ public class BankAccounts implements ActionListener {
         this.bm = bm;
         this.b = b;
         bAccounts = u.getBankAccounts();
-        welcome.setBounds(125, -75, 250, 250);
+        welcome.setBounds(125, -110, 250, 250);
         welcome.setFont(new Font("Roboto", Font.PLAIN, 25));
 
         // A for loop that creates a list of all the bank accounts
         for (int i = 0; i < bAccounts.size(); i++) {
-            // JLabel acc = new JLabel(bAccounts.get(i).getAccountType());
+            JLabel acc = new JLabel(bAccounts.get(i).getBalance() + "$");
             JLabel sno = new JLabel((i + 1) + ")");
             JButton select = new JButton(bAccounts.get(i).getAccountType());
-            // acc.setBounds(70, -12 + (i * 25), 150, 250);
-            // acc.setFont(new Font("Roboto", Font.PLAIN, 15));
+            acc.setBounds(250, 50 + (i * 50), 200, 25); // 100, 50 + (i * 50), 200, 25
+            acc.setFont(new Font("Roboto", Font.PLAIN, 15));
+            acc.setFocusable(false);
 
-            sno.setBounds(45, -12 + (i * 25), 150, 250);
+            sno.setBounds(50, 50 + (i * 50), 200, 25);
             sno.setFont(new Font("Roboto", Font.PLAIN, 15));
+            sno.setFocusable(false);
 
-            select.setBounds(70, 100 + (i * 25), 150, 25);
-            select.addActionListener(this);
+            select.setBounds(100, 50 + (i * 50), 100, 25);
             select.setFocusable(false);
+            select.addActionListener(this::actionPerformed);
 
             frame.add(sno);
-            // frame.add(acc);
+            frame.add(acc);
             frame.add(select);
         }
 
