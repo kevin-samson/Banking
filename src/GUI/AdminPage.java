@@ -4,8 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import src.users.User;
 import src.bank.BankManager;
-import src.GUI.AdminSide.CreatePage;
-import src.GUI.AdminSide.ViewUsers;
+import src.GUI.AdminSide.*;
 import src.bank.Bank;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -31,6 +30,7 @@ public class AdminPage implements ActionListener {
 
         delete.setBounds(100, 150, 200, 25);
         delete.setFocusable(false);
+        delete.addActionListener(this::actionPerformed);
 
         create.setBounds(100, 200, 200, 25);
         create.setFocusable(false);
@@ -76,6 +76,11 @@ public class AdminPage implements ActionListener {
             System.out.println("View");
             frame.dispose();
             new ViewUsers(u, b, bm);
+        }
+
+        if (e.getSource() == delete) {
+            System.out.println("Delete");
+            new DeleteUser(u, b, bm);
         }
     }
 }
