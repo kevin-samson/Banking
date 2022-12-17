@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import src.GUI.UserPage;
 import src.bank.BankManager;
 import src.bank.Bank;
+import java.util.regex.Pattern;
 
 public class ModifyDetails extends JFrame implements ActionListener {
     JFrame frame = new JFrame();
@@ -71,6 +72,22 @@ public class ModifyDetails extends JFrame implements ActionListener {
         this.u = u;
         this.b = b;
         this.bm = bm;
+        firstname.setText(u.getFirstName());
+        lastname.setText(u.getLastName());
+        email.setText(u.getEmail());
+        phoneno.setText(String.valueOf(u.getPhoneNumber()));
+    }
+
+    public static boolean isValid(String email) {
+        String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\." +
+                "[a-zA-Z0-9_+&*-]+)*@" +
+                "(?:[a-zA-Z0-9-]+\\.)+[a-z" +
+                "A-Z]{2,7}$";
+
+        Pattern pat = Pattern.compile(emailRegex);
+        if (email == null)
+            return false;
+        return pat.matcher(email).matches();
     }
 
     @Override
@@ -84,20 +101,42 @@ public class ModifyDetails extends JFrame implements ActionListener {
         if (e.getSource() == createbutton) {
             String first = firstname.getText();
             String last = lastname.getText();
-            String email = emailid.getText();
+            String email = this.email.getText();
             String phone = phoneno.getText();
+            // if (first.equals("") || last.equals("") || email.equals("") ||
+            // phone.equals("")) {
+            // JOptionPane.showMessageDialog(null, "Please fill all the fields");
+            // } else {
+            // int oldAccno = u.accountNumber;
+            // int oldPin = u.getPin();
+            // b.deleteUser(oldAccno);
+            // b.addUser(new User(first, last, email, Integer.parseInt(phone), oldAccno));
+            // b.getUserByAccountId(oldPin).setPin(oldPin);
+            // bm.save(b);
+            // JOptionPane.showMessageDialog(null, "Account Modified Successfully");
+            // new UserPage(b.getUserByAccountId(oldPin), bm, b);
+            // frame.dispose();
+            // }
+
             if (first.equals("") || last.equals("") || email.equals("") || phone.equals("")) {
                 JOptionPane.showMessageDialog(null, "Please fill all the fields");
+            } else if (!isValid(email)) {
+                JOptionPane.showMessageDialog(null, "Please enter a valid email");
+                emailid.setText("");
             } else {
-                int oldAccno = u.accountNumber;
-                int oldPin = u.getPin();
-                b.deleteUser(oldAccno);
-                b.addUser(new User(first, last, email, Integer.parseInt(phone), oldAccno));
-                b.getUserByAccountId(oldPin).setPin(oldPin);
-                bm.save(b);
-                JOptionPane.showMessageDialog(null, "Account Modified Successfully");
-                new UserPage(b.getUserByAccountId(oldPin), bm, b);
-                frame.dispose();
+                try {
+                    int oldAccno = u.accountNumber;
+                    int oldPin = u.getPin();
+                    b.deleteUser(oldAccno);
+                    b.addUser(new User(first, last, email, Integer.parseInt(phone), oldAccno));
+                    b.getUserByAccountId(oldPin).setPin(oldPin);
+                    bm.save(b);
+                    JOptionPane.showMessageDialog(null, "Account Modified Successfully");
+                    new UserPage(b.getUserByAccountId(oldAccno), bm, b);
+                    frame.dispose();
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(null, "Please enter valid details");
+                }
             }
         }
     }
