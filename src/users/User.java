@@ -37,6 +37,11 @@ public class User extends Person {
         }
     }
 
+    // A function that returs an iterator of all the bank accounts
+    public ArrayList<BackAccount> getBankAccounts() {
+        return bAccounts;
+    }
+
     public BackAccount getBankAccount(int acc) {
         return bAccounts.get(acc - 1);
     }

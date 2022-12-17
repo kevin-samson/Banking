@@ -73,12 +73,13 @@ public class Withdraw extends JFrame implements ActionListener {
         if (e.getSource() == hund) {
             if (ba.getBalance() < 100) {
                 JOptionPane.showMessageDialog(null, "Insufficient funds!");
+            } else {
+                ba.withdraw(100);
+                bm.save(b);
+                JOptionPane.showMessageDialog(null, "AED 100 has been withdrawn!");
+                new AccountPage(u, bm, b, ba);
+                frame.dispose();
             }
-            ba.withdraw(100);
-            bm.save(b);
-            JOptionPane.showMessageDialog(null, "AED 100 has been withdrawn!");
-            new AccountPage(u, bm, b, ba);
-            frame.dispose();
         }
 
         if (e.getSource() == twohund) {
