@@ -13,7 +13,7 @@ public class UserPage implements ActionListener {
     JFrame frame = new JFrame();
     JLabel welcome = new JLabel("Welcome!");
     JButton view = new JButton("View all Bank Accounts");
-    JButton delete = new JButton("Modify Account and delete account");
+    JButton delete = new JButton("Modify Account");
     JButton create = new JButton("Add Bank Account");
     JButton logout = new JButton("Logout");
     User u;
@@ -66,7 +66,7 @@ public class UserPage implements ActionListener {
             frame.dispose();
         }
         if (e.getSource() == delete) {
-            new ModifyandDelete(u, b, bm);
+            new ModifyDetails(u, b, bm);
             frame.dispose();
         }
         // if (e.getSource() == create) {
