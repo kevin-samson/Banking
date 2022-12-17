@@ -101,7 +101,7 @@ public class CreatePage implements ActionListener {
                 } else if (!isValid(email)) {
                     JOptionPane.showMessageDialog(null, "Please enter valid email!");
                     this.email.setText("");
-                } else if (phone.length() == 10) {
+                } else if (phone.length() != 10) {
                     JOptionPane.showMessageDialog(null, "Please enter valid phone number!");
                     phoneno.setText("");
                 } else if (AccountNumber.length() > 10) {
