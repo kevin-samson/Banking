@@ -9,6 +9,6 @@ User Side includes
 
 
 Admin Side includes
-*View all users
-*Delete users
-*Modify Users
+* View all users
+* Delete users
+* Modify Users
