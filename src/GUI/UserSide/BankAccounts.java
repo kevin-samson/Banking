@@ -31,7 +31,7 @@ public class BankAccounts implements ActionListener {
 
         // A for loop that creates a list of all the bank accounts
         for (int i = 0; i < bAccounts.size(); i++) {
-            JLabel acc = new JLabel(bAccounts.get(i).getBalance() + "$");
+            JLabel acc = new JLabel(bAccounts.get(i).getBalance() + " AED");
             JLabel sno = new JLabel((i + 1) + ")");
             JButton select = new JButton(bAccounts.get(i).getAccountType());
             acc.setBounds(250, 50 + (i * 50), 200, 25); // 100, 50 + (i * 50), 200, 25
